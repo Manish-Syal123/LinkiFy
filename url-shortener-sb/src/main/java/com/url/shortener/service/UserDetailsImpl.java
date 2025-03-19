@@ -14,7 +14,7 @@ import java.util.Collections;
 @Data
 @NoArgsConstructor
 public class UserDetailsImpl implements UserDetails {
-//    @Serial
+    @Serial
     private static final long serialVersionUID=1L;
 
     private Long id;

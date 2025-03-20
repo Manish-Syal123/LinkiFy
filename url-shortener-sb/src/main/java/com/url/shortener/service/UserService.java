@@ -14,6 +14,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 public class UserService {
@@ -24,8 +26,14 @@ public class UserService {
     private JwtUtils jwtUtils;
 
     public User registerUser(User user){
-        user.setPassword(passwordEncoder.encode(user.getPassword())); // encrypt the password before adding to the DB
-        return userRepository.save(user);
+        User isUsernameExist= findByUsername(user.getUsername());
+        User isEmailExist= userRepository.findByEmail(user.getEmail());
+        if(isUsernameExist != null || isEmailExist !=null){
+            throw new RuntimeException("Username or Email already exist!");
+        }else {
+            user.setPassword(passwordEncoder.encode(user.getPassword())); // encrypt the password before adding to the DB
+            return userRepository.save(user);
+        }
     }
 
     //login
@@ -42,8 +50,9 @@ public class UserService {
     }
 
     public User findByUsername(String name) {
-        return userRepository.findByUsername(name).orElseThrow(
-                ()-> new UsernameNotFoundException("User not found with username : "+name)
-        );
+//        return userRepository.findByUsername(name).orElseThrow(
+//                () -> new UsernameNotFoundException("User not found with username : " + name)
+//        );
+        return userRepository.findByUsername(name).orElse(null);
     }
 }

@@ -5,6 +5,7 @@ import com.url.shortener.dtos.RegisterRequest;
 import com.url.shortener.models.User;
 import com.url.shortener.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,8 +32,14 @@ public class AuthController {
         user.setEmail(registerRequest.getEmail());
         user.setRole("ROLE_USER");
 
-        userService.registerUser(user);
-        return ResponseEntity.ok("User Registered Successfully!");
+        try {
+//            userService.registerUser(user);
+            return ResponseEntity.ok("User Registered Successfully!" + userService.registerUser(user));
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>("Username or Email already exist!",HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
     }
 }

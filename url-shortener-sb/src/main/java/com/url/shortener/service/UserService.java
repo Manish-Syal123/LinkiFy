@@ -14,7 +14,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -28,6 +27,7 @@ public class UserService {
     public User registerUser(User user){
         User isUsernameExist= findByUsername(user.getUsername());
         User isEmailExist= userRepository.findByEmail(user.getEmail());
+
         if(isUsernameExist != null || isEmailExist !=null){
             throw new RuntimeException("Username or Email already exist!");
         }else {

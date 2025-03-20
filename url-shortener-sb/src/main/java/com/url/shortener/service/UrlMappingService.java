@@ -8,7 +8,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -49,5 +51,12 @@ public class UrlMappingService {
             shortUrl.append(characters.charAt(random.nextInt(characters.length())));
         }
         return shortUrl.toString();
+    }
+
+    public List<UrlMappingDTO> getUrlsByUser(User user) {
+        //findByUser will return List<UrlMapping> but we have to return List<UrlMappingDTO> therefore converting the urlMapping to UrlMappingDto before returning it.
+        return urlMappingRepository.findByUser(user).stream()
+                .map(this::convertToDto)
+                .toList();
     }
 }

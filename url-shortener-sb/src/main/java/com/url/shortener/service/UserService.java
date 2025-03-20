@@ -28,8 +28,9 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    //login
     public JwtAuthenticationResponse authenticateUser(LoginRequest loginRequest){
-        // this will authenticate the user based on there username and password by authenticationManager.authenticate(<username,password obj which is understood by spring security>)
+        // this will authenticate the user based on their username and password by authenticationManager.authenticate(<username,password obj which is understood by spring security>)
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),loginRequest.getPassword()));
 

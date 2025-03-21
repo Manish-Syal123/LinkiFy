@@ -15,5 +15,5 @@ public class ClickEvent {
 
     @ManyToOne //multiple clicks belongs to single url
     @JoinColumn(name = "url_mapping_id")
-    private UrlMapping urlMapping;
+    private UrlMapping urlMapping;  // only joining the UrlMapping's 'id' column from the complete UrlMapping obj
 }

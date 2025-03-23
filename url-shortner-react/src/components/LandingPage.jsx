@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { RiUserSettingsLine } from "react-icons/ri";
+import { motion } from "framer-motion";
 
 let desc =
   "Generate short, memorable links with ease using Linklytics’s intuitive interface. Share URLs effortlessly across platforms. Optimize your sharing strategy with Linklytics. Track clicks and manage your links seamlessly to enhance your online presence. Generate short, memorable links with ease using Linklytics’s intuitive interface. Share URLs effortlessly across platforms.";
@@ -168,13 +169,14 @@ const HeorSection = () => {
             <h1 className="px-6 text-lg text-gray-600">
               Seamless URL Shortening, Tailored for Everyone
             </h1>
-            <p className="mt-5 text-4xl font-bold leading-tight text-gray-900 sm:text-5xl lg:text-6xl">
+            {/* <p className="mt-5 text-4xl font-bold leading-tight text-gray-900 sm:text-5xl lg:text-6xl">
               Turn your long Links into{" "}
               <span className="relative inline-flex sm:inline">
                 <span className="bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] blur-lg filter opacity-30 w-full h-full absolute inset-0"></span>
                 <span className="relative">short Url's</span>
               </span>
-            </p>
+            </p> */}
+            <AnimatedText />
 
             <div className="px-8 sm:flex sm:items-center sm:justify-center sm:px-0 sm:space-x-5 mt-9">
               <a
@@ -549,4 +551,45 @@ const Reviews = () => {
     </section>
   );
 };
+
+const AnimatedText = () => {
+  const sentence = "short-Url's";
+  const words = sentence.split("");
+  const [key, setKey] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setKey((prevKey) => prevKey + 1);
+    }, words.length * 200 + 2000); // Ensures full text appears before resetting
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <motion.p
+      initial={{ opacity: 0, filter: "blur(10px)" }}
+      animate={{ opacity: 1, filter: "blur(0px)" }}
+      transition={{ duration: 1.5, ease: "easeOut" }}
+      className="mt-5 text-4xl font-bold leading-tight text-gray-900 sm:text-5xl lg:text-6xl"
+    >
+      Turn your long Links into{" "}
+      <span className="relative inline-flex sm:inline">
+        <span className="bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] blur-lg filter opacity-30 w-full h-full absolute inset-0"></span>
+        <span className="relative" key={key}>
+          {words.map((char, index) => (
+            <motion.span
+              key={index}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: index * 0.3, duration: 0.5 }} // Adjusted for slower appearance
+            >
+              {char}
+            </motion.span>
+          ))}
+        </span>
+      </span>
+    </motion.p>
+  );
+};
+
 export default LandingPage;

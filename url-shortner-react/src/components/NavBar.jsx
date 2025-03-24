@@ -8,7 +8,7 @@ const NavBar = () => {
         <div className="flex items-center justify-between">
           <div className="flex-shrink-0">
             <a
-              href="#"
+              href="/"
               title=""
               className="flex rounded outline-none focus:ring-1 focus:ring-gray-900 focus:ring-offset-2 text-2xl font-extrabold"
             >
@@ -89,14 +89,14 @@ const NavBar = () => {
 
           <div className="hidden lg:ml-auto lg:flex lg:items-center lg:space-x-10">
             <a
-              href="#"
+              href="/login"
               className="text-base font-medium text-gray-900 transition-all duration-200 rounded hover:text-opacity-50"
             >
               {" "}
               Customer Login{" "}
             </a>
             <a
-              href="#"
+              href="/register"
               className="inline-flex items-center justify-center px-6 py-3 text-base font-bold leading-7 text-white bg-gray-900 rounded-xl hover:bg-gray-600"
             >
               Sign up
@@ -129,14 +129,14 @@ const NavBar = () => {
                 About{" "}
               </a>
               <a
-                href="#"
+                href="/login"
                 className="flex items-center p-3 -m-3 text-base font-medium text-gray-900 rounded-xl hover:bg-gray-50"
               >
                 {" "}
                 Customer Login{" "}
               </a>
               <a
-                href="#"
+                href="/register"
                 className="inline-flex items-center justify-center px-6 py-3 text-base font-bold text-white bg-gray-900 rounded-xl hover:bg-gray-600"
               >
                 Sign up

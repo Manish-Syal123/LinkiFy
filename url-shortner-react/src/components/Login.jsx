@@ -4,10 +4,13 @@ import TextField from "./TextField";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../api/api";
 import toast from "react-hot-toast";
+import { TbLoader3 } from "react-icons/tb";
+import { useStoreContext } from "../contextApi/ContextApi";
 
-const SignupComponent = () => {
+const Login = () => {
   const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
+  const { setToken } = useStoreContext();
 
   const {
     register,
@@ -17,31 +20,34 @@ const SignupComponent = () => {
   } = useForm({
     defaultValues: {
       username: "",
-      email: "",
       password: "",
     },
     mode: "onTouch",
   });
 
-  const registerHandler = async (data) => {
+  const loginHandler = async (data) => {
     setLoader(true);
     try {
-      const { data: response } = await api.post(
-        "/api/auth/public/register",
-        data
+      const { data: response } = await api.post("/api/auth/public/login", data);
+
+      setToken(response.token);
+      sessionStorage.setItem(
+        "JWT_TOKEN_LINKIFY",
+        JSON.stringify(response.token)
       );
+
+      toast.success("Login Successful!");
       reset();
-      navigate("/login");
-      toast.success("Registeration Successful!");
+      navigate("/");
     } catch (error) {
       console.error(error);
-      toast.error("Registration failed!");
+      toast.error("Login failed!");
     } finally {
       setLoader(false);
     }
   };
   return (
-    <div className="mx-auto flex h-screen -mt-10 max-w-lg flex-col md:max-w-none md:flex-row md:pr-10 gap-20 pl-10">
+    <div className="mx-auto flex h-[screen] -mt-10 max-w-lg flex-col md:max-w-none md:flex-row md:pr-10 gap-20 pl-10">
       <div className="max-w-md rounded-3xl bg-gradient-to-t from-blue-700 via-blue-700 to-blue-600 px-4 py-10 text-white sm:px-10 md:m-6 md:mr-8">
         <p className="mb-20 font-bold tracking-wider">/LinkiFy</p>
         <p className="mb-4 text-3xl font-bold md:text-4xl md:leading-snug">
@@ -74,18 +80,18 @@ const SignupComponent = () => {
         </div>
       </div>
       <div className="px-4 py-20 w-lg">
-        <h2 className="mb-2 text-3xl font-bold">Sign Up</h2>
+        <h2 className="mb-2 text-3xl font-bold">Sign In</h2>
         <p className="mb-10 block font-bold text-gray-600">
-          Have an account?{" "}
+          New to LinkiFy?{" "}
           <Link
             className="font-semibold hover:underline hover:text-black no-underline"
-            to="/login"
+            to="/register"
           >
-            <span className="text-blue-400"> Login</span>
+            <span className="text-blue-400">Sign Up</span>
           </Link>
         </p>
-        {/* <p className="mb-1 font-medium text-gray-500">As</p> */}
-        {/* <div className="mb-6 flex flex-col gap-y-2 gap-x-4 lg:flex-row">
+        <p className="mb-1 font-medium text-gray-500">As</p>
+        <div className="mb-6 flex flex-col gap-y-2 gap-x-4 lg:flex-row">
           {["User"].map((option, index) => (
             <div
               key={index}
@@ -106,9 +112,9 @@ const SignupComponent = () => {
               <span className="pointer-events-none z-10">{option}</span>
             </div>
           ))}
-        </div> */}
+        </div>
         {/* Form starts here */}
-        <form onSubmit={handleSubmit(registerHandler)} className="w-full">
+        <form onSubmit={handleSubmit(loginHandler)} className="w-full">
           <div className="mb-4 flex flex-col">
             <TextField
               label="UserName"
@@ -122,7 +128,7 @@ const SignupComponent = () => {
               className="w-full border-gray-300 bg-[#f9fafb] px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
             />
           </div>
-          <div className="mb-4 flex flex-col">
+          {/* <div className="mb-4 flex flex-col">
             <TextField
               label="Email"
               required
@@ -134,7 +140,7 @@ const SignupComponent = () => {
               errors={errors}
               className="w-full border-gray-300 bg-[#f9fafb] px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
             />
-          </div>
+          </div> */}
 
           <div className="mb-4 flex flex-col">
             <TextField
@@ -153,9 +159,16 @@ const SignupComponent = () => {
           <button
             disabled={loader}
             type="submit"
-            className="hover:shadow-blue-600/40 rounded-xl bg-gradient-to-r from-blue-700 to-blue-600 px-8 py-3 font-bold text-white transition-all hover:opacity-90 hover:shadow-lg"
+            className="hover:shadow-blue-600/40 flex items-center justify-center rounded-xl bg-gradient-to-r from-blue-700 to-blue-600 px-8 py-3 font-bold text-white transition-all hover:opacity-90 hover:shadow-lg"
           >
-            Sign Up
+            {loader ? (
+              <>
+                Loading
+                <TbLoader3 size={25} className="animate-spin ml-2" />
+              </>
+            ) : (
+              "Sign In"
+            )}
           </button>
         </form>
         {/* Form end here */}
@@ -163,5 +176,4 @@ const SignupComponent = () => {
     </div>
   );
 };
-
-export default SignupComponent;
+export default Login;

@@ -1,12 +1,15 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RiUserSettingsLine } from "react-icons/ri";
 import { motion } from "framer-motion";
+import { useStoreContext } from "../contextApi/ContextApi";
 
 let desc =
   "Generate short, memorable links with ease using Linklytics’s intuitive interface. Share URLs effortlessly across platforms. Optimize your sharing strategy with Linklytics. Track clicks and manage your links seamlessly to enhance your online presence. Generate short, memorable links with ease using Linklytics’s intuitive interface. Share URLs effortlessly across platforms.";
 const LandingPage = () => {
   const [expanded, setExpanded] = useState(false);
+  const { token } = useStoreContext();
+  console.log("TOKEN FROM LANDING PAGE: " + token);
+
   return (
     <>
       <HeorSection expanded={expanded} setExpanded={setExpanded} />

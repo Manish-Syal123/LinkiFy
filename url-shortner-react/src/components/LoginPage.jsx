@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import { TbLoader3 } from "react-icons/tb";
 import { useStoreContext } from "../contextApi/ContextApi";
 
-const Login = () => {
+const LoginPage = () => {
   const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
   const { setToken } = useStoreContext();
@@ -38,7 +38,7 @@ const Login = () => {
 
       toast.success("Login Successful!");
       reset();
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       console.error(error);
       toast.error("Login failed!");
@@ -176,4 +176,4 @@ const Login = () => {
     </div>
   );
 };
-export default Login;
+export default LoginPage;

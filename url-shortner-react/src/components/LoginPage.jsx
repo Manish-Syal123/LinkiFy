@@ -31,10 +31,7 @@ const LoginPage = () => {
       const { data: response } = await api.post("/api/auth/public/login", data);
 
       setToken(response.token);
-      sessionStorage.setItem(
-        "JWT_TOKEN_LINKIFY",
-        JSON.stringify(response.token)
-      );
+      localStorage.setItem("JWT_TOKEN_LINKIFY", JSON.stringify(response.token));
 
       toast.success("Login Successful!");
       reset();

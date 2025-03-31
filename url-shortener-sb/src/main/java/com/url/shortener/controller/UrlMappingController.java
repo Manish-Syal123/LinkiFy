@@ -38,9 +38,10 @@ public class UrlMappingController {
         return ResponseEntity.ok(urlMappingDTO);
     }
 
+    //get Request
     @GetMapping("/myurls")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<List<UrlMappingDTO>> createShortUrl(Principal principal){
+    public ResponseEntity<List<UrlMappingDTO>> createShortUrl(Principal principal){  // get short URLS
         User user = userService.findByUsername(principal.getName());
         List<UrlMappingDTO> urls = urlMappingService.getUrlsByUser(user);
 

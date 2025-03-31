@@ -72,11 +72,11 @@ const NavBar = () => {
               Features{" "}
             </a>
             <a
-              href="#"
+              href="/dashboard"
               className="text-base font-medium text-gray-900 transition-all duration-200 rounded hover:text-opacity-50"
             >
               {" "}
-              Pricing{" "}
+              Dashboard{" "}
             </a>
             <a
               href="/about"
@@ -115,11 +115,11 @@ const NavBar = () => {
                 Features{" "}
               </a>
               <a
-                href="#"
+                href="/dashboard"
                 className="flex items-center p-3 -m-3 text-base font-medium text-gray-900 rounded-xl hover:bg-gray-50"
               >
                 {" "}
-                Pricing{" "}
+                Dashboard{" "}
               </a>
               <a
                 href="/about"

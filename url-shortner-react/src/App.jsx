@@ -1,14 +1,14 @@
+import { Toaster } from "react-hot-toast";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import LandingPage from "./components/LandingPage";
 import AboutPage from "./components/AboutPage";
-import NavBar from "./components/NavBar";
+import DashboardLayout from "./components/Dashboard/DashboardLayout";
 import Footer from "./components/Footer";
-import RegisterPage from "./components/RegisterPage";
-import { Toaster } from "react-hot-toast";
-import SignupComponent from "./components/SignupComponent";
+import LandingPage from "./components/LandingPage";
 import LoginPage from "./components/LoginPage";
-import DashboardLayout from "./Dashboard/DashboardLayout";
+import NavBar from "./components/NavBar";
+import SignupComponent from "./components/SignupComponent";
+// import DashboardLayout from "./Dashboard/DashboardLayout";
 
 function App() {
   return (

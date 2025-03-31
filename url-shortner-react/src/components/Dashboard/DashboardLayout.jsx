@@ -1,17 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import Graph from "./Graph";
-import { dummyData } from "../dummyData/data";
-import { useStoreContext } from "../contextApi/ContextApi";
-import { useFetchTotalClicks } from "../hooks/useQuery";
+import { dummyData } from "../../dummyData/data";
+import { useStoreContext } from "../../contextApi/ContextApi";
+import { useFetchTotalClicks } from "../../hooks/useQuery";
 import { TbLoader3 } from "react-icons/tb";
+import SpringModal from "./SpringModal";
 
 const DashboardLayout = () => {
+  const refetch = false;
   const { token } = useStoreContext();
+  const [shortenPopUp, setShortenPopUp] = useState(false);
 
   // console.log(useFetchTotalClicks(token, onError));
 
   const {
-    isLoading,
+    isLoading: loader,
     data: totalClicks,
     error,
   } = useFetchTotalClicks(token, onError);
@@ -21,7 +24,7 @@ const DashboardLayout = () => {
 
   return (
     <div className="lg:px-14 sm:px-8 px-4 min-h-[calc(100vh-64px)]">
-      {isLoading ? (
+      {loader ? (
         <TbLoader3 className="text-2xl animate-spin" />
       ) : (
         <div className="lg:w-[90%] w-full mx-auto py-16">
@@ -49,6 +52,11 @@ const DashboardLayout = () => {
           </div>
         </div>
       )}
+      <SpringModal
+        isOpen={shortenPopUp}
+        setIsOpen={setShortenPopUp}
+        refetch={refetch}
+      />
     </div>
   );
 };

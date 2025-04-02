@@ -38,6 +38,7 @@ const CreateNewShorten = ({ setIsOpen, refetch }) => {
         });
       });
 
+      // await refetch();
       refetch();
       setIsOpen(false);
     } catch (error) {

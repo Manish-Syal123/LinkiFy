@@ -49,7 +49,11 @@ const ShortenItem = ({ originalUrl, shortUrl, clickCount, createdDate }) => {
     setLoading(true);
     try {
       const { data } = await api.get(
-        `/api/urls/analytics/${selectedUrl}?startDate=2025-03-19T18:36:20&endDate=2025-03-27T23:59:59`,
+        `/api/urls/analytics/${selectedUrl}?startDate=${dayjs(
+          createdDate
+        ).format("YYYY-MM-DDTHH:mm:ss")}&endDate=${dayjs().format(
+          "YYYY-MM-DDTHH:mm:ss"
+        )}`,
         {
           headers: {
             "Content-Type": "application/json",

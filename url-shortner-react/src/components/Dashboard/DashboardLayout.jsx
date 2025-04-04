@@ -19,6 +19,7 @@ const DashboardLayout = () => {
     data: myShortUrls,
     refetch,
   } = useFetchMyShortUrls(token, onError);
+
   const {
     isLoading: loader,
     data: totalClicks,

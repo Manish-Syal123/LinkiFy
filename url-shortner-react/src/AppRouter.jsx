@@ -8,6 +8,7 @@ import LandingPage from "./components/LandingPage";
 import LoginPage from "./components/LoginPage";
 import NavBar from "./components/NavBar";
 import SignupComponent from "./components/SignupComponent";
+import PrivateRoute from "./PrivateRoute";
 
 const AppRouter = () => {
   return (
@@ -17,10 +18,30 @@ const AppRouter = () => {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/about" element={<AboutPage />} />
-        {/* <Route path="/register" element={<RegisterPage />} /> */}
-        <Route path="/register" element={<SignupComponent />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/dashboard" element={<DashboardLayout />} />
+        <Route
+          path="/register"
+          element={
+            <PrivateRoute publicPage={true}>
+              <SignupComponent />{" "}
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <PrivateRoute publicPage={true}>
+              <LoginPage />{" "}
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute publicPage={false}>
+              <DashboardLayout />
+            </PrivateRoute>
+          }
+        />
       </Routes>
       <Footer />
     </>

@@ -183,14 +183,14 @@ const HeorSection = () => {
 
             <div className="px-8 sm:flex sm:items-center sm:justify-center sm:px-0 sm:space-x-5 mt-9">
               <a
-                href="#"
+                href="/dashboard"
                 className="inline-flex items-center justify-center w-full px-8 py-3 text-lg font-bold text-white bg-gray-900 border-2 rounded-xl sm:w-auto hover:bg-gray-600"
               >
                 Create Short Link
               </a>
 
               <a
-                href="#"
+                href="/dashboard"
                 className="inline-flex items-center justify-center w-full px-6 py-3 mt-4 text-lg font-bold text-gray-900 border-2 border-gray-400 sm:w-auto sm:mt-0 rounded-xl hover:bg-gray-900 hover:text-white"
               >
                 <RiUserSettingsLine className="w-6 h-6 mr-2 font-extrabold" />
@@ -236,7 +236,7 @@ const Integration = () => {
             sint. Velit officia consequat duis.
           </p>
           <a
-            href="#"
+            href="/dashboard"
             title=""
             class="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-gray-900 transition-all duration-200 border-2 border-gray-200 rounded-md mt-9 hover:bg-gray-900 hover:text-white hover:border-gray-900 focus:bg-gray-900 focus:text-white focus:border-gray-900"
             role="button"

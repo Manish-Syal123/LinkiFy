@@ -1,7 +1,20 @@
 import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useStoreContext } from "../contextApi/ContextApi";
+import { GiCurlyWing } from "react-icons/gi";
 
 const NavBar = () => {
   const [expanded, setExpanded] = useState(false);
+  const navigate = useNavigate();
+  const path = useLocation().pathname;
+  const { token, setToken } = useStoreContext();
+
+  const onLogOuthandler = () => {
+    setToken(null);
+    localStorage.removeItem("JWT_TOKEN_LINKIFY");
+    navigate("/login");
+  };
+
   return (
     <header className="py-4 md:py-6 bg-gray-50">
       <div className="container px-4 mx-auto sm:px-6 lg:px-8">
@@ -17,7 +30,8 @@ const NavBar = () => {
                 src="https://cdn.rareblocks.xyz/collection/clarity/images/logo.svg"
                 alt="Logo"
               /> */}
-              <span className="text-blue-600">/</span>
+              <GiCurlyWing className="w-auto h-8 text-blue-600" />
+              {/* <span className="text-blue-600">/</span> */}
               LinkiFy
             </a>
           </div>
@@ -71,13 +85,13 @@ const NavBar = () => {
               {" "}
               Features{" "}
             </a>
-            <a
+            {/* <a
               href="/dashboard"
               className="text-base font-medium text-gray-900 transition-all duration-200 rounded hover:text-opacity-50"
             >
               {" "}
               Dashboard{" "}
-            </a>
+            </a> */}
             <a
               href="/about"
               className="text-base font-medium text-gray-900 transition-all duration-200 rounded hover:text-opacity-50"
@@ -88,19 +102,29 @@ const NavBar = () => {
           </div>
 
           <div className="hidden lg:ml-auto lg:flex lg:items-center lg:space-x-10">
-            <a
-              href="/login"
-              className="text-base font-medium text-gray-900 transition-all duration-200 rounded hover:text-opacity-50"
-            >
-              {" "}
-              Customer Login{" "}
-            </a>
-            <a
-              href="/register"
-              className="inline-flex items-center justify-center px-6 py-3 text-base font-bold leading-7 text-white bg-gray-900 rounded-xl hover:bg-gray-600"
-            >
-              Sign up
-            </a>
+            {!token ? (
+              <a
+                href="/login"
+                className="inline-flex items-center justify-center px-6 py-3 text-base font-bold leading-7 text-white bg-gray-900 rounded-xl hover:bg-gray-600"
+              >
+                {" "}
+                Login
+              </a>
+            ) : path === "/dashboard" ? (
+              <button
+                onClick={onLogOuthandler}
+                className="inline-flex items-center justify-center px-4 py-1 text-base font-bold leading-7 cursor-pointer text-black border-2  bg-transparent rounded-sm hover:bg-gray-600 hover:text-white"
+              >
+                LogOut
+              </button>
+            ) : (
+              <a
+                href="/dashboard"
+                className="inline-flex items-center justify-center px-6 py-3 text-base font-bold leading-7 text-white bg-gray-900 rounded-xl hover:bg-gray-600"
+              >
+                Dashboard
+              </a>
+            )}
           </div>
         </div>
 
@@ -114,13 +138,13 @@ const NavBar = () => {
                 {" "}
                 Features{" "}
               </a>
-              <a
+              {/* <a
                 href="/dashboard"
                 className="flex items-center p-3 -m-3 text-base font-medium text-gray-900 rounded-xl hover:bg-gray-50"
               >
                 {" "}
                 Dashboard{" "}
-              </a>
+              </a> */}
               <a
                 href="/about"
                 className="flex items-center p-3 -m-3 text-base font-medium text-gray-900 rounded-xl hover:bg-gray-50"
@@ -128,19 +152,22 @@ const NavBar = () => {
                 {" "}
                 About{" "}
               </a>
-              <a
-                href="/login"
-                className="flex items-center p-3 -m-3 text-base font-medium text-gray-900 rounded-xl hover:bg-gray-50"
-              >
-                {" "}
-                Customer Login{" "}
-              </a>
-              <a
-                href="/register"
-                className="inline-flex items-center justify-center px-6 py-3 text-base font-bold text-white bg-gray-900 rounded-xl hover:bg-gray-600"
-              >
-                Sign up
-              </a>
+              {!token ? (
+                <a
+                  href="/login"
+                  className="inline-flex items-center justify-center px-6 py-3 text-base font-bold text-white bg-gray-900 rounded-xl hover:bg-gray-600"
+                >
+                  {" "}
+                  Login{" "}
+                </a>
+              ) : (
+                <a
+                  href="/register"
+                  className="inline-flex items-center justify-center px-6 py-3 text-base font-bold text-white bg-gray-900 rounded-xl hover:bg-gray-600"
+                >
+                  Dashboard
+                </a>
+              )}
             </div>
           </nav>
         )}

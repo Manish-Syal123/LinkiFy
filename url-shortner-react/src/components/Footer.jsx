@@ -1,4 +1,5 @@
 import React from "react";
+import { GiCurlyWing } from "react-icons/gi";
 
 const Footer = () => {
   return (
@@ -21,7 +22,8 @@ const Footer = () => {
                 src="https://cdn.rareblocks.xyz/collection/clarity/images/logo.svg"
                 alt="Logo"
               /> */}
-              <span className="text-blue-600">/</span>
+              <GiCurlyWing className="w-auto h-8 text-blue-600" />
+              {/* <span className="text-blue-600">/</span> */}
               LinkiFy
             </a>
 

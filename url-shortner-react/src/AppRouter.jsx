@@ -9,6 +9,7 @@ import LoginPage from "./components/LoginPage";
 import NavBar from "./components/NavBar";
 import SignupComponent from "./components/SignupComponent";
 import PrivateRoute from "./PrivateRoute";
+import ErrorPage from "./components/ErrorPage";
 
 const AppRouter = () => {
   return (
@@ -40,6 +41,16 @@ const AppRouter = () => {
             <PrivateRoute publicPage={false}>
               <DashboardLayout />
             </PrivateRoute>
+          }
+        />
+        <Route
+          path="/error"
+          element={<ErrorPage message="Something went wrong." />}
+        />
+        <Route
+          path="*"
+          element={
+            <ErrorPage message="We can't seem to find the page you're looking for." />
           }
         />
       </Routes>

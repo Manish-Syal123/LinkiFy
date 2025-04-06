@@ -7,10 +7,12 @@ import { TbLoader3 } from "react-icons/tb";
 import SpringModal from "./SpringModal";
 import { FaLink } from "react-icons/fa";
 import ShortenUrlList from "./ShortenUrlList";
+import { useNavigate } from "react-router-dom";
 
 const DashboardLayout = () => {
   const { token } = useStoreContext();
   const [shortenPopUp, setShortenPopUp] = useState(false);
+  const navigator = useNavigate();
 
   // console.log(useFetchTotalClicks(token, onError));
 
@@ -26,6 +28,7 @@ const DashboardLayout = () => {
     error,
   } = useFetchTotalClicks(token, onError);
   function onError() {
+    navigator("/error");
     console.log("ERROR");
   }
 

@@ -66,7 +66,7 @@ const ShortenItem = ({ originalUrl, shortUrl, clickCount, createdDate }) => {
       setAnalyticsData(data);
       setSelectedUrl("");
     } catch (error) {
-      // navigate("/error");
+      navigate("/error");
       console.error(error);
     } finally {
       setLoading(false);
